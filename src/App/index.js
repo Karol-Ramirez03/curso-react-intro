@@ -3,6 +3,9 @@ import { AppUI } from './AppUi';
 
 import React from 'react';
 
+// localStorage.setItem('Todos_v1',defaultTodos);
+// localStorage.removeItem('Todos_v1')
+
 const defaultTodos = [
   {id:1, text: 'cortar tomate', completed: true},
   {id:2, text: 'Tomar la clase de lit', completed: false},
@@ -15,8 +18,7 @@ const defaultTodos = [
   {id:9, text: 'limpiar mi cuarto', completed: false}
 ]
 
-// localStorage.setItem('Todos_v1',defaultTodos);
-// localStorage.removeItem('Todos_v1')
+
 // localStorage.setItem("TODOS_V1",JSON.stringify(defaultTodos));
 
 
@@ -24,7 +26,7 @@ const defaultTodos = [
 function App() {
 
 
-  const [todos, saveTodos]= useLocalStorage('TODOS_V1', [])
+  const{ item:todos, saveItem:saveTodos ,loading,error}= useLocalStorage('TODOS_V1', [])
   const [searchValue, setsearchValue] = React.useState("");
 
   console.log("los usuarios buscan: "+searchValue)
@@ -40,6 +42,7 @@ function App() {
     })
   
 
+    console.log(todos)
   const completeTodos = (text) => {
     const newTodos = [...todos];
     const TodoIndex = newTodos.findIndex(
@@ -59,8 +62,11 @@ function App() {
     saveTodos(newTodos);
   }
 
+
   return (
     <AppUI 
+      loading={loading}
+      error={error}
       completedTodos = {completedTodos}
       totalTodos = {totalTodos}
       searchValue = {searchValue}

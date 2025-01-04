@@ -3,10 +3,14 @@ import { TodoSearch } from '../TodoSearch/TodoSearch';
 import { TodoList } from '../TodoList/TodoList';
 import { TodoItem } from '../TodoItem/TodoItem';
 import { CreateTodoButton } from '../CreateTodoButton/TodoButton';
+import { TodosLoading } from '../TodosLoading';
+import { TodosError } from '../TodosError';
 
 import React from 'react';
 
 function AppUI({
+    loading,
+    error,
     completedTodos,
     totalTodos,
     searchValue,
@@ -24,6 +28,9 @@ function AppUI({
           />
     
           <TodoList>
+            {loading && <TodosLoading/>}
+            {error && <TodosError/>}
+            {(!loading && searchedTodos.lenght === 0 ) && <p>Crea tu primer Todo</p>}
             {searchedTodos.map((todo) => (
               <TodoItem 
               onDelete={() => deleteTodos(todo.text)} 
