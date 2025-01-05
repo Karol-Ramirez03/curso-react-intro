@@ -1,4 +1,6 @@
+import React from "react";
 import "./Todo.css";
+import { TodoContext } from "../TodoContext";
 
 // Forma1
 
@@ -22,7 +24,8 @@ import "./Todo.css";
 
 // FORMA2: con el import
 
-function TodoCounter({total,completed}){
+function TodoCounter(){
+  const {completedTodos: completed, totalTodos:total} = React.useContext(TodoContext)
   return (
     <h1 className="TodoCounter">
       Has completado <span>{completed}</span> de <span>{total}</span> Todos

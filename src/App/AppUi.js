@@ -5,32 +5,28 @@ import { TodoItem } from '../TodoItem/TodoItem';
 import { CreateTodoButton } from '../CreateTodoButton/TodoButton';
 import { TodosLoading } from '../TodosLoading';
 import { TodosError } from '../TodosError';
-
+import { TodoContext } from '../TodoContext';
 import React from 'react';
 
-function AppUI({
+
+function AppUI() {
+
+  const {
     loading,
     error,
-    completedTodos,
-    totalTodos,
-    searchValue,
-    setsearchValue,
     searchedTodos,
     deleteTodos,
     completeTodos
-}) {
-    return (
-        <React.Fragment>
-          <TodoCounter completed={completedTodos} total={totalTodos}/>
-          <TodoSearch 
-            searchValue={searchValue}
-            setsearchValue={setsearchValue}
-          />
-    
+  } = React.useContext(TodoContext)
+
+   return (
+        <>
+          <TodoCounter />
+          <TodoSearch />
           <TodoList>
             {loading && <TodosLoading/>}
             {error && <TodosError/>}
-            {(!loading && searchedTodos.lenght === 0 ) && <p>Crea tu primer Todo</p>}
+            {(!loading && searchedTodos.length === 0 ) && <p>Crea tu primer Todo</p>}
             {searchedTodos.map((todo) => (
               <TodoItem 
               onDelete={() => deleteTodos(todo.text)} 
@@ -42,7 +38,7 @@ function AppUI({
           </TodoList>
           <CreateTodoButton />
           {/* <Car mundo="mundo" exclamacion = { signo }/> */}
-        </React.Fragment>
+        </>
         
       );
 }
