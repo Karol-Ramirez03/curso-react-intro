@@ -7,6 +7,7 @@ import { TodosLoading } from '../TodosLoading';
 import { TodosError } from '../TodosError';
 import { Modal } from '../Modal';
 import { TodoContext } from '../TodoContext';
+import { TodoForm } from '../TodoForm';
 import React from 'react';
 
 function AppUI() {
@@ -44,7 +45,7 @@ function AppUI() {
           {/* <Car mundo="mundo" exclamacion = { signo }/> */}
           {openModal && (
             <Modal>
-              la funcionalidad de agregar todos
+              <TodoForm />
             </Modal>
           )}
         </>
